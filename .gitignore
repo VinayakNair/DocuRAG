@@ -1,0 +1,14 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Database
+chroma_db/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# OS/System
+.DS_Store
