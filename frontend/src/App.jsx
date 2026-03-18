@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 function App() {
   const [query, setQuery] = useState('')
   const [ingestUrl, setIngestUrl] = useState('')
@@ -74,7 +76,7 @@ function App() {
     setHasSearched(false)
     
     try {
-      const response = await fetch(`http://localhost:8000/ingest`, {
+      const response = await fetch(`${API_BASE}/ingest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ github_url: ingestUrl })
@@ -112,7 +114,7 @@ function App() {
     setHasSearched(true)
     
     try {
-      const response = await fetch(`http://localhost:8000/search?q=${encodeURIComponent(query)}&n_results=5`)
+      const response = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}&n_results=5`)
       const data = await response.json()
       setResults(data.results || [])
     } catch (error) {
