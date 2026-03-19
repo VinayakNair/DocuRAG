@@ -2,6 +2,10 @@
 
 **A free, full-stack open-source RAG pipeline that transforms GitHub repositories into semantic search engines.**
 
+### 🟢 Live Demo
+- **Web Application**: [https://docu-rag-website.vercel.app/](https://docu-rag-website.vercel.app/)
+- **Backend API**: [https://docurag-ip3k.onrender.com/docs](https://docurag-ip3k.onrender.com/docs)
+
 ![DocuRAG Search UI](docs/hero.png)
 
 DocuRAG is a complete, local Retrieval-Augmented Generation (RAG) application. It allows anyone to instantly turn complex, fragmented markdown documentation from any public GitHub repository into a lightning-fast semantic search engine.
