@@ -8,6 +8,13 @@ def chunk_markdown(documents: List[Dict[str, str]], chunk_size: int = 1000, chun
     cleans the content, and chunks it.
     Returns a list of chunk dicts containing 'text' and 'metadata'.
     """
+    if not documents:
+        return []
+
+    # Safeguard against invalid overlap parameters
+    if chunk_overlap >= chunk_size:
+        chunk_overlap = max(0, chunk_size // 5)
+
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
@@ -22,13 +29,15 @@ def chunk_markdown(documents: List[Dict[str, str]], chunk_size: int = 1000, chun
         
         # Clean the text first
         cleaned_content = clean_markdown(raw_content)
-        
+        if not cleaned_content:
+            continue
+            
         # Split text
         doc_chunks = splitter.split_text(cleaned_content)
         
         for i, chunk_text in enumerate(doc_chunks):
-            # Only keep chunks of reasonable length, skip very tiny ones
-            if len(chunk_text.strip()) > 50:
+            # Keep chunks with meaningful text content
+            if len(chunk_text.strip()) >= 20:
                 chunks.append({
                     "text": chunk_text,
                     "metadata": {
